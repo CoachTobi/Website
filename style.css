@@ -1,0 +1,547 @@
+/* --- AKADEMIE KORNBERGER | COMPLETE MASTER STYLESHEET --- */
+
+:root {
+    --black: #080808;
+    --dark-grey: #121212; 
+    --pure-black: #050505; 
+    --mokka-accent: #9c846d;
+    --white: #f2f2f2;
+    --text-muted: #666;
+    --grey-border: rgba(255, 255, 255, 0.1);
+}
+
+/* 1. RESET & BASICS */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+body, html { 
+    background-color: var(--black); 
+    color: var(--white); 
+    font-family: 'Inter', sans-serif; 
+    height: 100vh; 
+    overflow: hidden; 
+    line-height: 1.6; 
+}
+
+a { text-decoration: none !important; color: inherit !important; }
+
+/* 2. BACKGROUND SYSTEM */
+.hero-bg { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    z-index: 1; 
+}
+
+.hero-bg img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    object-position: 20% center; 
+}
+
+.overlay-gradient { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.95) 100%); 
+}
+
+.main-wrapper { 
+    position: relative; 
+    z-index: 10; 
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+    padding: 3vh 6%; 
+}
+
+/* 3. NAVIGATION & MENU */
+.navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 3vh; 
+    z-index: 1000; 
+    position: relative;
+}
+
+.logo { 
+    letter-spacing: 4px; 
+    font-weight: 200; 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+}
+
+.accent-gold { color: var(--mokka-accent) !important; font-weight: 600; }
+.italic { font-style: italic; font-family: 'Playfair Display', serif; }
+
+.back-link { 
+    font-size: 0.7rem; 
+    color: var(--white) !important; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    opacity: 0.7; 
+    transition: 0.3s;
+}
+
+.back-link:hover { opacity: 1; color: var(--mokka-accent) !important; }
+
+/* BURGER MENU STYLES */
+.menu-btn { 
+    background: none; 
+    border: none; 
+    cursor: pointer; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 9px; 
+    z-index: 2100; 
+    padding: 10px; 
+}
+
+.menu-btn span { 
+    width: 36px; 
+    height: 2px; 
+    background: var(--white); 
+    transition: 0.3s; 
+}
+
+.menu-overlay { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(8, 8, 8, 0.98); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    opacity: 0; 
+    visibility: hidden; 
+    transition: 0.5s ease; 
+    z-index: 2000; 
+}
+
+.menu-overlay.open { opacity: 1; visibility: visible; }
+
+.menu-nav-links { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 30px; 
+}
+
+.menu-link { 
+    font-family: 'Playfair Display', serif; 
+    font-size: clamp(2.5rem, 5vw, 3.5rem); 
+    transition: 0.4s ease; 
+    opacity: 0.7; 
+}
+
+.menu-link:hover { 
+    color: var(--mokka-accent) !important; 
+    font-style: italic; 
+    opacity: 1; 
+    transform: scale(1.05); 
+}
+
+.menu-link-small {
+    margin-top: 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    opacity: 0.5;
+}
+
+/* 4. HERO SECTION */
+.hero { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
+}
+
+.hero h1 { 
+    font-family: 'Playfair Display', serif; 
+    font-size: clamp(3rem, 7vh, 5.5rem); 
+    line-height: 1.1; 
+    margin-bottom: 4vh; 
+}
+
+.subtitle { 
+    text-transform: uppercase; 
+    letter-spacing: 5px; 
+    font-size: 0.7rem; 
+    color: var(--mokka-accent); 
+    margin-bottom: 15px; 
+    display: block; 
+}
+
+.main-button { 
+    display: inline-block; 
+    padding: 22px 50px; 
+    border-radius: 50px; 
+    border: 1px solid var(--mokka-accent); 
+    color: white !important; 
+    text-transform: uppercase; 
+    letter-spacing: 3px; 
+    font-size: 0.75rem; 
+    font-weight: 600; 
+    transition: 0.4s; 
+    background: transparent; 
+    cursor: pointer;
+}
+
+.main-button:hover { 
+    background: var(--mokka-accent); 
+    box-shadow: 0 0 20px rgba(156, 132, 109, 0.4); 
+}
+
+/* 5. PACKAGE DESIGN */
+.package-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); /* Auf 4 Spalten geändert */
+    gap: 20px; 
+    max-width: 1400px; 
+    margin: auto; 
+    width: 100%; 
+    height: auto; /* Höhe auf Auto, da 4 Karten mehr Platz brauchen */
+    padding: 5vh 0;
+}
+
+.package-card { 
+    background: var(--pure-black); 
+    border: 1px solid var(--grey-border); 
+    border-radius: 20px; 
+    padding: 4vh 40px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1); 
+}
+
+.package-card:hover { 
+    transform: translateY(-5px) scale(1.02); 
+    border-color: var(--mokka-accent); 
+    background: rgba(12, 12, 12, 0.9); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8); 
+}
+
+.package-label { 
+    display: block; 
+    font-size: 0.65rem; 
+    font-weight: 600; 
+    letter-spacing: 3px; 
+    margin-bottom: 2vh; 
+    text-transform: uppercase; 
+}
+
+.package-title { 
+    font-size: clamp(1.5rem, 3vh, 2.2rem); 
+    font-weight: 400; 
+    margin-bottom: 3vh; 
+}
+
+.feature-list { 
+    list-style: none; 
+    font-size: clamp(0.8rem, 1.5vh, 0.95rem); 
+    color: #7a7a7a; 
+    line-height: 2.2; 
+    flex-grow: 1; 
+}
+
+.feature-list li span { 
+    color: #555; 
+    font-weight: bold; 
+    margin-right: 12px; 
+}
+
+.package-btn { 
+    display: block; 
+    width: 100%; 
+    background: #6b5c4d; 
+    color: white !important; 
+    text-align: center; 
+    padding: 2vh 0; 
+    border-radius: 50px; 
+    text-transform: uppercase; 
+    letter-spacing: 3px; 
+    font-size: 0.7rem; 
+    font-weight: 600; 
+    margin-top: 3vh; 
+    transition: 0.3s; 
+}
+
+.package-btn:hover { background: var(--mokka-accent); letter-spacing: 4px; }
+
+/* 6. FORMULAR */
+.step-container { 
+    flex: 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    z-index: 20; 
+}
+
+.step { 
+    background: var(--pure-black); 
+    padding: 50px; 
+    width: 100%; 
+    max-width: 550px; 
+    border: 1px solid var(--grey-border); 
+    border-radius: 20px; 
+}
+
+.step.active { display: block; animation: fadeIn 0.6s ease; }
+
+.input-box { margin-bottom: 30px; }
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.input-box label { 
+    display: block; 
+    font-size: 0.6rem; 
+    color: var(--mokka-accent); 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    margin-bottom: 10px; 
+}
+
+.input-box input { 
+    width: 100%; 
+    background: transparent; 
+    border: none; 
+    border-bottom: 1px solid var(--grey-border); 
+    padding: 12px 0; 
+    color: white; 
+    font-size: 1.1rem; 
+    outline: none; 
+    transition: 0.3s; 
+}
+
+.input-box input:focus { border-color: var(--mokka-accent); }
+
+.option-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    margin-bottom: 30px; 
+}
+
+.option { 
+    padding: 18px; 
+    border: 1px solid var(--grey-border); 
+    cursor: pointer; 
+    text-align: center; 
+    border-radius: 50px; 
+    transition: 0.3s; 
+    font-size: 0.75rem; 
+    text-transform: uppercase; 
+}
+
+.option.selected { 
+    border-color: var(--mokka-accent); 
+    color: var(--mokka-accent); 
+    background: rgba(156, 132, 109, 0.05); 
+}
+
+.next-btn, button[type="submit"] { 
+    background: var(--mokka-accent); 
+    color: white !important; 
+    padding: 20px 45px; 
+    border-radius: 50px; 
+    border: none; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    font-size: 0.7rem; 
+    letter-spacing: 2px; 
+    font-weight: 600; 
+}
+
+.back-btn { 
+    background: transparent; 
+    border: 1px solid var(--grey-border); 
+    color: var(--text-muted) !important; 
+    padding: 20px 30px; 
+    border-radius: 50px; 
+    cursor: pointer; 
+    text-transform: uppercase; 
+    font-size: 0.7rem; 
+}
+
+.btn-group { display: flex; gap: 15px; margin-top: 20px; }
+
+/* 7. ÜBER MICH & GALLERY */
+.ueber-mich-page .main-wrapper { 
+    padding: 0; 
+}
+
+.ueber-mich-page .navbar {
+    position: absolute;
+    top: 3vh;
+    left: 6%;
+    right: 6%;
+    margin-bottom: 0;
+}
+
+.ueber-mich-content { 
+    display: flex; 
+    justify-content: flex-end; 
+    height: 100vh; 
+}
+
+.ueber-mich-text-block { 
+    width: 100%; 
+    max-width: 650px; 
+    background: linear-gradient(to right, transparent 0%, rgba(5, 5, 5, 0.95) 20%, rgba(5, 5, 5, 1) 100%); 
+    padding: 2vh 8% 2vh 12%; 
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+}
+
+.image-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 4vh;
+    width: 100%;
+}
+
+.reveal-img {
+    width: 85%;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.reveal-img.side { align-self: flex-end; }
+.reveal-img.visible { opacity: 1; transform: translateY(0); }
+.reveal-img img { width: 100%; height: auto; display: block; filter: grayscale(20%); transition: transform 2s ease, filter 1s ease; }
+.reveal-img:hover img { transform: scale(1.03); filter: grayscale(0%); }
+
+/* 8. INSTA TAG & FOOTER */
+.insta-tag { 
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+    color: #9c846d !important; 
+    text-decoration: none !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    position: fixed; 
+    right: max(20px, env(safe-area-inset-right)); 
+    bottom: calc(20px + env(safe-area-inset-bottom)); 
+    z-index: 9999 !important; 
+    opacity: 1; 
+    transition: opacity 0.3s, transform 0.3s; 
+    background: rgba(0, 0, 0, 0.45); 
+    padding: 10px 14px; 
+    border-radius: 999px; 
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25); 
+    backdrop-filter: blur(8px); 
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.insta-tag:hover {
+    color: #ffffff !important;
+}
+
+.insta-tag svg {
+    stroke: #9c846d;
+}
+
+.insta-tag:hover svg {
+    stroke: #ffffff;
+}
+
+.minimal-footer { 
+    text-align: center; 
+    font-size: 0.6rem; 
+    color: #444; 
+    padding: 2vh 0; 
+    margin-top: auto; 
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(10px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+/* 9. MOBILE FIXES */
+@media (max-width: 768px) {
+    body, html { 
+        height: auto; 
+        overflow-y: auto; 
+    }
+
+    .main-wrapper { height: auto; }
+    
+    .ueber-mich-page .hero-bg { position: relative; height: 50vh; }
+    .ueber-mich-content { flex-direction: column; height: auto; }
+    
+    .ueber-mich-page .navbar {
+        position: fixed;
+        background: var(--black);
+        padding: 20px 6%;
+        top: 0;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid var(--grey-border);
+    }
+
+    .ueber-mich-text-block { 
+        width: 100%; 
+        background: var(--black); 
+        padding: 40px 10%; 
+        margin-top: -60px; 
+        position: relative; 
+        height: auto;
+    }
+    
+    .package-grid { grid-template-columns: 1fr; height: auto; }
+    .hero h1 { font-size: 2.8rem; }
+    
+    .insta-tag { 
+        bottom: calc(20px + env(safe-area-inset-bottom)); 
+        right: max(20px, env(safe-area-inset-right)); 
+        background: rgba(0, 0, 0, 0.6); 
+        padding: 10px 14px; 
+        border-radius: 999px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .image-gallery { gap: 30px; }
+    .reveal-img { width: 100%; }
+}
+/* Instagram Icon Sichtbarkeit */
+.instagram-link, .footer-social a {
+    display: inline-block;
+    color: #9c846d !important; /* Dein Mokka-Gold */
+    font-size: 24px;           /* Größe anpassen */
+    text-decoration: none;
+    z-index: 999;              /* Damit es oben liegt */
+    position: relative;
+    opacity: 1 !important;     /* Sicherstellen, dass es nicht transparent ist */
+}
+
+.instagram-link:hover {
+    color: #ffffff !important; /* Weiß beim Drüberfahren */
+    transform: scale(1.1);
+}

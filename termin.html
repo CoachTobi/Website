@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse | Coach Tobi</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        .error-msg {
+            color: #ff4d4d;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            display: none;
+        }
+        .other-input-container {
+            margin-top: 15px;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .option.favorite::after {
+            content: "Kundenfavorit";
+            display: block;
+            font-size: 0.5rem;
+            letter-spacing: 1px;
+            color: var(--mokka-accent);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border: 1px solid var(--mokka-accent);
+            border-radius: 50%;
+            color: var(--mokka-accent);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            margin-left: 8px;
+            vertical-align: middle;
+            transition: all 0.3s ease;
+        }
+        .info-icon:hover {
+            background: var(--mokka-accent);
+            color: white;
+        }
+        .checkbox-container {
+            margin-top: 15px; 
+            text-align: left; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            opacity: 0.7;
+            justify-content: center;
+        }
+        .checkbox-container input {
+            accent-color: var(--mokka-accent); 
+            width: 16px; 
+            height: 16px; 
+            cursor: pointer;
+        }
+        .checkbox-container label {
+            font-size: 0.75rem; 
+            letter-spacing: 1px; 
+            cursor: pointer; 
+            text-transform: uppercase;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="form-page">
+
+    <div class="hero-bg">
+        <img src="tobi-portrait.png" alt="Tobias Kornberger">
+        <div class="overlay-gradient"></div>
+    </div>
+
+    <div class="main-wrapper">
+        <nav class="navbar">
+            <div class="logo">COACH <span class="accent-gold">TOBI</span></div>
+            <a href="index.html" class="back-link">✕ ABBRECHEN</a>
+        </nav>
+
+        <main class="step-container">
+            <div id="successMessage" class="step" style="display: none; text-align: center;">
+                <span class="step-number">Erfolg</span>
+                <h2>Vielen Dank!</h2>
+                <p style="color: #9c846d; letter-spacing: 1px; line-height: 1.6;">
+                    Deine Daten wurden erfolgreich übermittelt.<br>
+                    Ich werde mich in Kürze persönlich bei dir melden.<br><br>
+                    <small style="color: #666;">Du wirst gleich automatisch weitergeleitet...</small>
+                </p>
+            </div>
+
+            <form id="academyForm" action="https://api.web3forms.com/submit" method="POST" novalidate>
+                
+                <input type="hidden" name="access_key" value="af74ac25-f1b5-427b-9d82-468b01943a9f">
+                <input type="hidden" name="subject" value="Neue Coaching-Analyse von Website">
+                <input type="hidden" name="from_name" value="Coach Tobi Website">
+                
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+
+                <div class="step active" id="step1">
+                    <span class="step-number">01 / 06</span>
+                    <h2>Wie darf ich dich nennen?</h2>
+                    <div class="input-box">
+                        <input type="text" id="input_name" name="name" placeholder="Dein Name">
+                        <div class="error-msg" id="error1">Bitte gib deinen Namen ein</div>
+                    </div>
+                    <button type="button" class="next-btn" onclick="validateAndNext(1, 2)">Weiter</button>
+                </div>
+
+                <div class="step" id="step2" style="display: none;">
+                    <span class="step-number">02 / 06</span>
+                    <h2>Dein Status Quo.</h2>
+                    <div class="input-row">
+                        <div class="input-box">
+                            <label>Ist-Gewicht (kg)</label>
+                            <input type="number" id="input_gewicht_ist" name="gewicht_ist" placeholder="z.B. 85">
+                        </div>
+                        <div class="input-box">
+                            <label>Ziel-Gewicht (kg)</label>
+                            <input type="number" id="input_gewicht_soll" name="gewicht_soll" placeholder="z.B. 75">
+                        </div>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="weight_unknown">
+                        <label for="weight_unknown">Ich kenne mein Gewicht aktuell nicht</label>
+                    </div>
+                    <div class="error-msg" id="error2" style="margin-bottom: 20px;">Bitte gib dein Gewicht an</div>
+                    <div class="btn-group">
+                        <button type="button" class="back-btn" onclick="nextStep(1)">Zurück</button>
+                        <button type="button" class="next-btn" onclick="validateAndNext(2, 3)">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step3" style="display: none;">
+                    <span class="step-number">03 / 06</span>
+                    <h2>Was fällt dir gerade schwer?</h2>
+                    <div class="option-grid">
+                        <div class="option" onclick="selectOption(this, 'fokus', 'Disziplin & Struktur')">Disziplin & Struktur</div>
+                        <div class="option" onclick="selectOption(this, 'fokus', 'Gewichtsmanagement')">Gewichtsmanagement</div>
+                        <div class="option" onclick="selectOption(this, 'fokus', 'Energie im Alltag')">Energie im Alltag</div>
+                        <div class="option" onclick="selectOption(this, 'fokus', 'Sonstiges')">Etwas anderes...</div>
+                    </div>
+                    <div class="other-input-container" id="sonstiges_container">
+                        <div class="input-box">
+                            <input type="text" id="input_fokus_frei" name="fokus_sonstiges" placeholder="Beschreibe es kurz...">
+                        </div>
+                    </div>
+                    <div class="error-msg" id="error3" style="margin-bottom: 20px;">Wähle eine Option aus</div>
+                    <input type="hidden" id="selectedFokus" name="fokus">
+                    <div class="btn-group">
+                        <button type="button" class="back-btn" onclick="nextStep(2)">Zurück</button>
+                        <button type="button" class="next-btn" onclick="validateAndNext(3, 4)">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step4" style="display: none;">
+                    <span class="step-number">04 / 06</span>
+                    <h2>Dein Zeit-Investment?</h2>
+                    <div class="option-grid">
+                        <div class="option" onclick="selectOption(this, 'zeit', '1-2 mal')">1-2 mal pro Woche</div>
+                        <div class="option" onclick="selectOption(this, 'zeit', '3-4 mal')">3-4 mal pro Woche</div>
+                        <div class="option" onclick="selectOption(this, 'zeit', 'Täglich möglich')">Täglich / Sehr flexibel</div>
+                    </div>
+                    <div class="error-msg" id="error4" style="margin-bottom: 20px;">Wähle eine Option aus</div>
+                    <input type="hidden" id="selectedZeit" name="zeit_kapazitaet">
+                    <div class="btn-group">
+                        <button type="button" class="back-btn" onclick="nextStep(3)">Zurück</button>
+                        <button type="button" class="next-btn" onclick="validateAndNext(4, 5)">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step5" style="display: none;">
+                    <span class="step-number">05 / 06</span>
+                    <h2 style="display: flex; align-items: center; justify-content: center;">
+                        Welches Paket? <a href="programme.html" target="_blank" class="info-icon" title="Pakete ansehen">i</a>
+                    </h2>
+                    <div class="option-grid">
+                        <div class="option" onclick="selectOption(this, 'paket', 'Basic')">Basic</div>
+                        <div class="option favorite" onclick="selectOption(this, 'paket', 'Standard')">Standard</div>
+                        <div class="option" onclick="selectOption(this, 'paket', 'Premium')">Premium</div>
+                        <div class="option" onclick="selectOption(this, 'paket', 'Elite')">Elite</div>
+                    </div>
+                    <div class="error-msg" id="error5" style="margin-bottom: 20px;">Wähle ein Paket aus</div>
+                    <input type="hidden" id="selectedPaket" name="interessiertes_paket">
+                    <div class="btn-group">
+                        <button type="button" class="back-btn" onclick="nextStep(4)">Zurück</button>
+                        <button type="button" class="next-btn" onclick="validateAndNext(5, 6)">Weiter</button>
+                    </div>
+                </div>
+
+                <div class="step" id="step6" style="display: none;">
+                    <span class="step-number">06 / 06</span>
+                    <h2>Letzter Schritt.</h2>
+                    <div class="input-box">
+                        <label>Telefonnummer</label>
+                        <input type="tel" id="input_tel" name="telefon" placeholder="+43 664...">
+                        <div class="error-msg" id="error6">Bitte gib eine gültige Nummer ein (z.B. +43...)</div>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="back-btn" onclick="nextStep(5)">Zurück</button>
+                        <button type="submit" id="submitBtn" class="next-btn">Absenden</button>
+                    </div>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active');
+                s.style.display = "none";
+            });
+            const next = document.getElementById('step' + step);
+            if(next) {
+                next.classList.add('active');
+                next.style.display = "block";
+            }
+        }
+
+        function validateAndNext(current, next) {
+            let isValid = false;
+            const error = document.getElementById('error' + current);
+            if(error) error.style.display = "none";
+
+            if (current === 1) {
+                if (document.getElementById('input_name').value.trim().length > 1) isValid = true;
+            } 
+            else if (current === 2) {
+                const ist = document.getElementById('input_gewicht_ist').value;
+                const soll = document.getElementById('input_gewicht_soll').value;
+                const unknown = document.getElementById('weight_unknown').checked;
+                if (unknown || (ist !== "" && soll !== "")) isValid = true;
+            } 
+            else if (current === 3) {
+                if (document.getElementById('selectedFokus').value !== "") isValid = true;
+            } 
+            else if (current === 4) {
+                if (document.getElementById('selectedZeit').value !== "") isValid = true;
+            } 
+            else if (current === 5) {
+                if (document.getElementById('selectedPaket').value !== "") isValid = true;
+            }
+
+            if (isValid) nextStep(next);
+            else if(error) error.style.display = "block";
+        }
+
+        function selectOption(el, type, value) {
+            el.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            
+            if(type === 'fokus') {
+                document.getElementById('selectedFokus').value = value;
+                document.getElementById('sonstiges_container').style.display = (value === 'Sonstiges') ? "block" : "none";
+            }
+            if(type === 'zeit') document.getElementById('selectedZeit').value = value;
+            if(type === 'paket') document.getElementById('selectedPaket').value = value;
+            
+            const err = el.parentElement.parentElement.querySelector('.error-msg');
+            if(err) err.style.display = "none";
+        }
+
+        document.getElementById("academyForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const tel = document.getElementById('input_tel').value.trim();
+            
+            const telPattern = /^[0\+]/;
+            if(tel.length < 8 || !telPattern.test(tel)) {
+                document.getElementById('error6').style.display = "block";
+                return;
+            }
+
+            const btn = document.getElementById("submitBtn");
+            btn.innerText = "Wird gesendet...";
+            btn.disabled = true;
+
+            const data = new FormData(this);
+            // In JSON umwandeln für Web3Forms
+            const object = Object.fromEntries(data);
+            const json = JSON.stringify(object);
+
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: json,
+                    headers: { 
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+                const result = await response.json();
+                if (response.ok) {
+                    this.style.display = "none";
+                    document.getElementById("successMessage").style.display = "block";
+                    setTimeout(() => { window.location.href = "index.html"; }, 4000);
+                } else { throw new Error(); }
+            } catch (error) {
+                alert("Fehler beim Senden. Bitte versuche es später erneut.");
+                btn.innerText = "Absenden";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
