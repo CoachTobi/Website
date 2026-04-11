@@ -5,56 +5,182 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pakete | Coach Tobi</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
-        /* Direkt-Fix für den Insta-Tag, falls das CSS klemmt */
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-y: auto !important;
+            margin: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 3vh;
+            left: 6%;
+            right: 6%;
+            width: 88%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-top: 15vh;
+            margin-bottom: 6vh;
+            padding: 0 6%;
+        }
+
+        /* FIX: Starre 4 Spalten auf Desktop */
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            padding: 0 4% 10vh 4%;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 92%;
+        }
+
+        .package-card {
+            background: rgba(15, 15, 15, 0.6);
+            border: 1px solid rgba(156, 132, 109, 0.2);
+            padding: 35px 20px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            min-height: 480px;
+        }
+
+        .package-card:hover {
+            border-color: #9c846d;
+            transform: translateY(-5px);
+            background: rgba(15, 15, 15, 0.9);
+        }
+
+        .package-label {
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .package-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #9c846d;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+
+        .feature-list li {
+            font-size: 0.85rem;
+            font-weight: 200;
+            margin-bottom: 12px;
+            color: rgba(255,255,255,0.8);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.4;
+        }
+
+        .feature-list li span {
+            color: #9c846d;
+            font-weight: 600;
+        }
+
+        .package-btn {
+            display: inline-block;
+            padding: 15px 0;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            border: 1px solid #9c846d;
+            transition: all 0.3s ease;
+            background: transparent;
+            margin-top: auto;
+        }
+
+        .package-btn:hover {
+            background: #9c846d;
+            color: #000;
+        }
+
         .insta-tag {
             display: flex !important;
             align-items: center;
             gap: 8px;
-            color: #9c846d !important; /* Mokka-Gold */
+            color: #9c846d !important;
             text-decoration: none;
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             letter-spacing: 1px;
-            position: fixed; /* Fixiert ihn am Screen */
+            position: fixed;
             right: 20px;
-            bottom: 20px;
+            bottom: 30px;
             z-index: 9999;
-            opacity: 1;
-            transition: opacity 0.3s;
+            background: rgba(10, 10, 10, 0.6);
+            padding: 8px 15px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
         }
-        .insta-tag:hover {
-            color: #ffffff !important;
+
+        /* Responsive Anpassungen */
+        @media (max-width: 1200px) {
+            .package-grid { grid-template-columns: repeat(2, 1fr); gap: 25px; }
         }
-        .insta-tag svg {
-            stroke: #9c846d;
-        }
-        .insta-tag:hover svg {
-            stroke: #ffffff;
+
+        @media (max-width: 650px) {
+            header { margin-top: 12vh; }
+            .package-grid { grid-template-columns: 1fr; width: 100%; padding: 0 20px 10vh 20px; }
+            .insta-tag { bottom: 20px; right: 10px; font-size: 0.7rem; }
         }
     </style>
 </head>
-<body>
-    <div class="hero-bg" style="background: #050505;"></div>
-    
+<body class="packages-page">
+
     <div class="main-wrapper">
         <nav class="navbar">
             <div class="logo">COACH <span class="accent-gold">TOBI</span></div>
-            <a href="index.html" class="back-link">✕ ZURÜCK</a>
+            <div class="menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+            </div>
         </nav>
 
-        <header style="text-align: center; margin-bottom: 2vh;">
-            <span class="subtitle">Investition in dich</span>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(2rem, 6vh, 3.5rem); margin-top: 10px;">
-                Wähle dein <span class="italic">Level.</span>
+        <header>
+            <span class="subtitle" style="color: #9c846d; letter-spacing: 4px; text-transform: uppercase; font-size: 0.7rem;">Investition in dich</span>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vh, 3.5rem); margin-top: 15px;">
+                Wähle dein <span class="italic accent-gold">Level.</span>
             </h1>
         </header>
 
-        <div class="package-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
-            
+        <div class="package-grid">
             <div class="package-card">
                 <div>
                     <span class="package-label">EINSTIEG</span>
@@ -68,9 +194,9 @@
                 <a href="termin.html" class="package-btn">ANFRAGEN</a>
             </div>
 
-            <div class="package-card" style="border-color: var(--mokka-accent); background: rgba(15, 15, 15, 0.9);">
+            <div class="package-card" style="border-color: #9c846d; background: rgba(20, 20, 20, 0.8);">
                 <div>
-                    <span class="package-label" style="color: var(--mokka-accent);">POPULÄR</span>
+                    <span class="package-label" style="color: #9c846d;">POPULÄR</span>
                     <h2 class="package-title">Standard</h2>
                     <ul class="feature-list">
                         <li><span>✓</span> Trainingsplan & Ersteinweisung</li>
@@ -79,7 +205,7 @@
                         <li><span>✓</span> <strong>Chat-Support (alle Fragen)</strong></li>
                     </ul>
                 </div>
-                <a href="termin.html" class="package-btn" style="background: var(--mokka-accent);">JETZT WÄHLEN</a>
+                <a href="termin.html" class="package-btn" style="background: #9c846d; color: #000;">JETZT WÄHLEN</a>
             </div>
 
             <div class="package-card">
@@ -110,16 +236,42 @@
                 <a href="termin.html" class="package-btn">ANFRAGEN</a>
             </div>
         </div>
-        
-        <a href="https://instagram.com/kornberger.tobias" target="_blank" class="insta-tag">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-            @kornberger.tobias
-        </a>
-        <footer class="minimal-footer">© 2026 Coach Tobi</footer>
+
+        <footer style="margin-top: auto; margin-bottom: 5vh; text-align: center; opacity: 0.2; font-size: 0.6rem; letter-spacing: 2px;">
+            © 2026 COACH TOBI
+        </footer>
     </div>
+
+    <a href="https://instagram.com/kornberger.tobias" target="_blank" class="insta-tag">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </svg>
+        @kornberger.tobias
+    </a>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-nav-links">
+            <a href="index.html" class="menu-link" onclick="toggleMenu()">Home</a>
+            <a href="ueber-mich.html" class="menu-link" onclick="toggleMenu()">Über mich</a>
+            <a href="programme.html" class="menu-link" onclick="toggleMenu()">Pakete</a>
+            <hr style="width: 30px; border: 0; border-top: 1px solid rgba(156, 132, 109, 0.3); margin: 20px 0;">
+            <a href="impressum.html" class="menu-link-small" onclick="toggleMenu()">Impressum</a>
+            <a href="datenschutz.html" class="menu-link-small" onclick="toggleMenu()">Datenschutz</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menuOverlay');
+            menu.classList.toggle('open');
+            if (menu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
 </body>
 </html>

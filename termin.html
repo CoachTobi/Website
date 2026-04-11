@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Analyse | Coach Tobi</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
+        /* Grundstyling zur Sicherheit falls CSS nicht lädt */
+        body { background-color: #050505; margin: 0; }
+        
         .error-msg {
             color: #ff4d4d;
             font-size: 0.65rem;
@@ -27,7 +29,7 @@
             display: block;
             font-size: 0.5rem;
             letter-spacing: 1px;
-            color: var(--mokka-accent);
+            color: #9c846d;
             margin-top: 4px;
             font-weight: 600;
         }
@@ -37,9 +39,9 @@
             justify-content: center;
             width: 18px;
             height: 18px;
-            border: 1px solid var(--mokka-accent);
+            border: 1px solid #9c846d;
             border-radius: 50%;
-            color: var(--mokka-accent);
+            color: #9c846d;
             text-decoration: none;
             font-size: 0.7rem;
             font-family: 'Inter', sans-serif;
@@ -49,7 +51,7 @@
             transition: all 0.3s ease;
         }
         .info-icon:hover {
-            background: var(--mokka-accent);
+            background: #9c846d;
             color: white;
         }
         .checkbox-container {
@@ -62,7 +64,7 @@
             justify-content: center;
         }
         .checkbox-container input {
-            accent-color: var(--mokka-accent); 
+            accent-color: #9c846d; 
             width: 16px; 
             height: 16px; 
             cursor: pointer;
@@ -73,6 +75,28 @@
             cursor: pointer; 
             text-transform: uppercase;
             font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+
+        /* Minimaler Footer für Rechtssicherheit */
+        .form-footer {
+            margin-top: 50px;
+            padding-bottom: 40px;
+            text-align: center;
+            position: relative;
+            z-index: 20;
+        }
+        .form-footer a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+            text-transform: uppercase;
+        }
+        .form-footer a:hover {
+            color: #9c846d;
         }
     </style>
 </head>
@@ -86,7 +110,7 @@
     <div class="main-wrapper">
         <nav class="navbar">
             <div class="logo">COACH <span class="accent-gold">TOBI</span></div>
-            <a href="index.html" class="back-link">✕ ABBRECHEN</a>
+            <a href="index.html" class="back-link" style="text-decoration: none; color: #9c846d; font-size: 0.7rem; letter-spacing: 2px;">✕ ABBRECHEN</a>
         </nav>
 
         <main class="step-container">
@@ -207,6 +231,11 @@
                         <input type="tel" id="input_tel" name="telefon" placeholder="+43 664...">
                         <div class="error-msg" id="error6">Bitte gib eine gültige Nummer ein (z.B. +43...)</div>
                     </div>
+                    
+                    <p style="font-size: 0.7rem; color: #666; margin-top: 25px; letter-spacing: 0.5px; text-align: center; line-height: 1.5;">
+                        Mit dem Absenden erkläre ich mich mit der <a href="datenschutz.html" target="_blank" style="color: #9c846d; text-decoration: none; border-bottom: 1px solid #9c846d;">Datenschutzerklärung</a> einverstanden.
+                    </p>
+
                     <div class="btn-group">
                         <button type="button" class="back-btn" onclick="nextStep(5)">Zurück</button>
                         <button type="submit" id="submitBtn" class="next-btn">Absenden</button>
@@ -214,6 +243,12 @@
                 </div>
             </form>
         </main>
+
+        <footer class="form-footer">
+            <a href="impressum.html">Impressum</a>
+            <a href="datenschutz.html">Datenschutz</a>
+            <p style="font-size: 0.55rem; color: rgba(255,255,255,0.15); margin-top: 20px; letter-spacing: 2px;">© 2026 COACH TOBI</p>
+        </footer>
     </div>
 
     <script>
@@ -287,7 +322,6 @@
             btn.disabled = true;
 
             const data = new FormData(this);
-            // In JSON umwandeln für Web3Forms
             const object = Object.fromEntries(data);
             const json = JSON.stringify(object);
 
@@ -300,7 +334,6 @@
                         'Content-Type': 'application/json'
                     }
                 });
-                const result = await response.json();
                 if (response.ok) {
                     this.style.display = "none";
                     document.getElementById("successMessage").style.display = "block";

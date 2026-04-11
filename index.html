@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coach Tobi | Home</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&family=Playfair+Display:italic,wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
@@ -15,23 +14,23 @@
             align-items: center;
             gap: 8px;
             color: #9c846d !important; /* Mokka-Gold */
-            -webkit-text-fill-color: #9c846d !important; /* Fix für iOS Text-Rendering */
+            -webkit-text-fill-color: #9c846d !important;
             text-decoration: none;
             font-family: 'Inter', sans-serif;
-            font-size: 0.75rem; /* Etwas kleiner für Mobile */
+            font-size: 0.75rem;
             letter-spacing: 1px;
             
             /* Positionierung */
             position: fixed;
             right: 15px;
-            bottom: 30px; /* Höher gesetzt, damit es nicht mit der Home-Bar kollidiert */
+            bottom: 30px;
             z-index: 10000 !important;
             
             /* Sichtbarkeit-Boost: Die "Pille" */
             background: rgba(10, 10, 10, 0.65); 
             padding: 8px 15px;
             border-radius: 30px;
-            backdrop-filter: blur(8px); /* Blur-Effekt für den Hintergrund */
+            backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(156, 132, 109, 0.2);
             transition: all 0.3s ease;
@@ -96,14 +95,17 @@
             <a href="index.html" class="menu-link" onclick="toggleMenu()">Home</a>
             <a href="ueber-mich.html" class="menu-link" onclick="toggleMenu()">Über mich</a>
             <a href="programme.html" class="menu-link" onclick="toggleMenu()">Pakete</a>
+            <hr style="width: 30px; border: 0; border-top: 1px solid rgba(156, 132, 109, 0.3); margin: 20px 0;">
             <a href="impressum.html" class="menu-link-small" onclick="toggleMenu()">Impressum</a>
+            <a href="datenschutz.html" class="menu-link-small" onclick="toggleMenu()">Datenschutz</a>
         </div>
     </div>
 
     <script>
         function toggleMenu() {
-            document.getElementById('menuOverlay').classList.toggle('open');
-            if (document.getElementById('menuOverlay').classList.contains('open')) {
+            const menu = document.getElementById('menuOverlay');
+            menu.classList.toggle('open');
+            if (menu.classList.contains('open')) {
                 document.body.style.overflow = 'hidden';
             } else {
                 document.body.style.overflow = 'auto';
