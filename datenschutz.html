@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutz | Coach Tobi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-y: auto !important;
+            margin: 0;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 3vh;
+            left: 6%;
+            right: 6%;
+            width: 88%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .legal-content {
+            max-width: 700px;
+            margin: 15vh auto 10vh auto;
+            padding: 40px 25px;
+            line-height: 1.8;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vh, 3rem);
+            color: #9c846d;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(156, 132, 109, 0.2);
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #9c846d;
+            margin-top: 35px;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-weight: 200;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        strong {
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        .footer-date {
+            margin-top: 50px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        a {
+            color: #9c846d;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body class="datenschutz-page">
+
+    <div class="main-wrapper">
+        <nav class="navbar">
+            <div class="logo">COACH <span class="accent-gold">TOBI</span></div>
+            <div class="menu-btn" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <main class="legal-content">
+            <h1>Datenschutz<span style="font-style: italic;">erklärung</span></h1>
+            
+            <p>Der Schutz Ihrer persönlichen Daten ist uns ein besonderes Anliegen. Wir verarbeiten Ihre Daten daher ausschließlich auf Grundlage der gesetzlichen Bestimmungen (DSGVO, TKG 2021).</p>
+
+            <h2>1. Verantwortlicher</h2>
+            <p>
+                Tobias Benjamin Kornberger<br>
+                Unterer Kreckerweg 1, Tür 2<br>
+                8600 Bruck an der Mur, Österreich<br>
+                E-Mail: <a href="mailto:tobias.b.kornberger@icloud.com">tobias.b.kornberger@icloud.com</a>
+            </p>
+
+            <h2>2. Kontakt mit uns & Formular-Daten</h2>
+            <p>
+                Wenn Sie das Analyse-Formular auf unserer Website ausfüllen, werden die von Ihnen angegebenen Daten (Name, E-Mail, Telefonnummer, Fitness-Ziele, Gewicht etc.) zwecks Bearbeitung der Anfrage gespeichert. 
+            </p>
+            <p>
+                Für den Versand der Formular-Inhalte nutzen wir den Dienst <strong>Web3Forms</strong> (W3F Labs). Die Daten werden dabei verschlüsselt an Web3Forms übertragen, damit diese uns per E-Mail zugestellt werden können. Web3Forms speichert die Daten nur temporär bis zur Zustellung und gibt diese nicht an Dritte weiter. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSGVO (Durchführung vorvertraglicher Maßnahmen).
+            </p>
+
+            <h2>3. Hosting & Logfiles</h2>
+            <p>Diese Website wird über GitHub Pages (GitHub Inc.) gehostet. GitHub erhebt Daten über Zugriffe auf die Seite (IP-Adresse, Browser-Typ, Datum/Uhrzeit). Dies ist technisch notwendig für den sicheren Betrieb der Website (Art. 6 Abs. 1 lit. f DSGVO).</p>
+
+            <h2>4. Analyse-Daten</h2>
+            <p>Die im Rahmen des Fitness-Checks erhobenen Daten dienen rein der Erstellung eines individuellen Beratungsangebots. Es erfolgt keine Weitergabe an Werbenetzwerke oder unbefugte Dritte.</p>
+
+            <h2>5. Ihre Rechte</h2>
+            <p>Ihnen stehen bezüglich Ihrer bei uns gespeicherten Daten grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerruf und Widerspruch zu. Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht verstößt, können Sie sich bei der zuständigen Aufsichtsbehörde (in Österreich die Datenschutzbehörde) beschweren.</p>
+            
+            <div class="footer-date">
+                © 2026 COACH TOBI — STAND: 11.04.2026
+            </div>
+        </main>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-nav-links">
+            <a href="index.html" class="menu-link" onclick="toggleMenu()">Home</a>
+            <a href="ueber-mich.html" class="menu-link" onclick="toggleMenu()">Über mich</a>
+            <a href="programme.html" class="menu-link" onclick="toggleMenu()">Pakete</a>
+            <hr style="width: 30px; border: 0; border-top: 1px solid rgba(156, 132, 109, 0.3); margin: 20px 0;">
+            <a href="impressum.html" class="menu-link-small" onclick="toggleMenu()">Impressum</a>
+            <a href="datenschutz.html" class="menu-link-small" onclick="toggleMenu()">Datenschutz</a>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menuOverlay');
+            menu.classList.toggle('open');
+            if (menu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
